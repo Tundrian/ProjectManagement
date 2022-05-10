@@ -17,17 +17,23 @@ const Project = require('../models/project')
 // @route GET /api/projects
 // @access Private
 const getProjects = asyncHandler(async (req, res) => {
-    if(!req.body.text){
-        console.log('here')
-        res.status(400).json({message: 'Please add a text field'})
-    }
-    res.status(200).json({message: 'Get Projects'})
+    const projects = await Project.find()
+    res.status(200).json(projects)
 })
 // @desc Set Project
 // @route POST /api/projects
 // @access Private
 const setProject = asyncHandler(async (req, res) => {
-    res.status(200).json({message: 'Set Projects'})
+    if(!req.body.text){
+        res.status(400)
+        throw new Error('Please add a text field')
+    }
+
+    const project = await Project.create({
+        text: req.body.text
+    })
+
+    res.status(200).json(project)
 })
 // @desc Update Project
 // @route GET /api/projects
