@@ -15,4 +15,4 @@ const projectSchema = mongoose.Schema({
     }
 }, {timestamps: true})
 
-module.exports = mongoose.model('Project', projectSchema)
+module.exports = mongoose.model('project', projectSchema)
